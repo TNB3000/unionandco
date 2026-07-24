@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-CA" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact | Union &amp; Company</title>
+  <meta name="description" content="Get in touch with Kathy Marcelline about Toronto tourism guiding, tourism partnerships and advisory work, or a wedding ceremony. One short form, or email directly.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_CA">
+  <meta property="og:site_name" content="Union &amp; Company">
+  <meta property="og:title" content="Contact | Union &amp; Company">
+  <meta property="og:description" content="Get in touch about Toronto tourism guiding, partnerships and advisory work, or a wedding ceremony.">
+  <meta property="og:url" content="https://example.com/contact.html">
+  <!-- TODO: confirm with Kathy — set the live og:url and add an og:image share graphic (1200×630). -->
+
+  <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="wordmark" href="index.html" aria-label="Union and Company — home">
+        <svg class="nav-mark" viewBox="0 0 24 40" aria-hidden="true" focusable="false">
+          <path d="M12 3 V33 M8 13 Q12 8 16 13"/>
+        </svg>
+        <span>Union &amp; Company</span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle__bars" aria-hidden="true"><span></span></span>
+        Menu
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="tourism.html">Tourism</a></li>
+          <li><a href="weddings.html">Weddings</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="band hero">
+      <div class="container">
+        <span class="eyebrow">Contact</span>
+        <h1>Tell me what you&rsquo;re planning.</h1>
+        <p class="lead measure">One short form for every kind of inquiry. Choose what fits and I&rsquo;ll be in
+          touch. Prefer email? You can reach me directly below.</p>
+      </div>
+    </section>
+
+    <section class="band band--soft">
+      <div class="container contact-layout">
+        <div>
+          <!--
+            TODO: confirm with Kathy — create a Formspree form and replace YOUR_FORM_ID below,
+            or swap the action for her preferred handler. The mailto link in the aside is the
+            no-cost fallback and works today.
+          -->
+          <form class="form" data-contact-form
+                action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+
+            <fieldset>
+              <legend>What&rsquo;s this about?</legend>
+              <div class="radio-group" role="radiogroup" aria-label="Type of inquiry">
+                <label class="radio">
+                  <input type="radio" name="inquiry-type" value="tourism-guiding" required>
+                  <span>Tourism guiding</span>
+                </label>
+                <label class="radio">
+                  <input type="radio" name="inquiry-type" value="tourism-partnerships">
+                  <span>Tourism partnerships &amp; advisory</span>
+                </label>
+                <label class="radio">
+                  <input type="radio" name="inquiry-type" value="weddings">
+                  <span>Weddings</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="field">
+              <label for="name">Your name</label>
+              <input type="text" id="name" name="name" autocomplete="name" required>
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" required>
+            </div>
+
+            <div class="field">
+              <label for="organization">Organization <span class="hint">(optional)</span></label>
+              <input type="text" id="organization" name="organization" autocomplete="organization">
+            </div>
+
+            <!-- Tourism-specific fields (shown for guiding inquiries when JS is on) -->
+            <div data-when="tourism-guiding">
+              <div class="field">
+                <label for="group-size">Group size <span class="hint">(approximate)</span></label>
+                <input type="text" id="group-size" name="group-size" inputmode="numeric">
+              </div>
+              <div class="field">
+                <label for="travel-dates">Travel dates <span class="hint">(or rough timing)</span></label>
+                <input type="text" id="travel-dates" name="travel-dates"
+                       placeholder="e.g. late September 2026">
+              </div>
+            </div>
+
+            <!-- Wedding-specific field (shown for wedding inquiries when JS is on) -->
+            <div data-when="weddings">
+              <div class="field">
+                <label for="ceremony-date">Ceremony date <span class="hint">(or approximate)</span></label>
+                <input type="text" id="ceremony-date" name="ceremony-date"
+                       placeholder="e.g. 2026-06-20">
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="message">Your message</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+
+            <!-- Simple spam honeypot; real people leave this empty. -->
+            <div class="field" hidden aria-hidden="true">
+              <label for="company-website">Leave this field empty</label>
+              <input type="text" id="company-website" name="_gotcha" tabindex="-1" autocomplete="off">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Send inquiry</button>
+
+            <p class="form-note">This form uses a third-party service to deliver your message. If you&rsquo;d
+              rather not, please <a class="prose" href="mailto:hello@unionandcompany.ca">email me directly</a>.</p>
+          </form>
+        </div>
+
+        <aside class="contact-aside" aria-label="Other ways to reach Kathy">
+          <span class="eyebrow">Or reach me directly</span>
+          <!-- TODO: confirm with Kathy — real business email and (if she wants it listed) phone number. -->
+          <p><a class="prose" href="mailto:hello@unionandcompany.ca">hello@unionandcompany.ca</a></p>
+          <p>Based in Toronto, Ontario. Available across the Greater Toronto Area and for step-on and
+            arrival services at Toronto Pearson.</p>
+          <p>I read every message myself and aim to reply within a few business days.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <span class="footer__mark">
+            <svg class="nav-mark" viewBox="0 0 24 40" aria-hidden="true" focusable="false">
+              <path d="M12 3 V33 M8 13 Q12 8 16 13"/>
+            </svg>
+            <span class="wordmark" style="pointer-events:none;">Union &amp; Company</span>
+          </span>
+          <svg class="skyline" viewBox="0 0 320 60" aria-hidden="true" focusable="false">
+            <path d="M6 46 L74 46 L74 30 L96 30 L96 46 L150 46 L150 18 L154 12 L155 6 L156 12 L160 18 L160 46 L188 46 L188 34 L210 34 L210 46 L314 46"/>
+          </svg>
+        </div>
+        <div class="footer__contact">
+          <h2>Get in touch</h2>
+          <!-- TODO: confirm with Kathy — replace with her real business email. -->
+          <p><a href="mailto:hello@unionandcompany.ca">hello@unionandcompany.ca</a></p>
+          <nav aria-label="Footer">
+            <ul>
+              <li><a href="tourism.html">Tourism</a></li>
+              <li><a href="weddings.html">Weddings</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <p>Union &amp; Company &mdash; Kathy Marcelline. Toronto, Ontario, Canada.
+          No cookies, no tracking on this site.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

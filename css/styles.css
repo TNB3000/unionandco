@@ -1,0 +1,603 @@
+/* ==========================================================================
+   Union & Company — styles.css
+   Hand-coded, framework-free. Mobile-first.
+   Sections:
+     1. Tokens & root
+     2. Reset & base
+     3. Typography
+     4. Layout helpers (container, bands, rhythm)
+     5. Skyline motif
+     6. Header & navigation
+     7. Buttons & links
+     8. Components (cards, steps, services, quotes, form)
+     9. Footer
+    10. Motion (reveal, skyline draw) & reduced-motion
+   ========================================================================== */
+
+/* 1. Tokens & root ---------------------------------------------------------- */
+:root {
+  --ink:     #1B2A41;  /* navy — headings, footer, primary buttons, dark bands */
+  --paper:   #F6F8F9;  /* cool-tinted near-white base */
+  --brass:   #B08D3E;  /* muted brass — decorative rules, motif, underlines     */
+  --slate:   #43506B;  /* body text                                            */
+  --harbour: #7E97AD;  /* soft blue — subtle backgrounds, borders              */
+  --white:   #FCFCFB;  /* cards on paper, text on ink                          */
+
+  /* Brass is only ~2.9:1 on paper, which fails WCAG AA for text. This deeper
+     brass reaches ~4.6:1 on paper and is used for eyebrow TEXT on light bands.
+     The full --brass is reserved for non-text decoration and for text on navy
+     (where --brass reaches ~4.6:1). */
+  --brass-deep: #8A6D28;
+
+  /* Fluid type scale */
+  --fs-eyebrow: 0.78rem;
+  --fs-body:    1.0625rem;
+  --fs-lead:    clamp(1.15rem, 1.02rem + 0.5vw, 1.4rem);
+  --fs-h3:      clamp(1.2rem, 1.05rem + 0.6vw, 1.5rem);
+  --fs-h2:      clamp(1.75rem, 1.25rem + 2vw, 2.85rem);
+  --fs-h1:      clamp(2.6rem, 1.55rem + 4.3vw, 4.85rem);
+
+  --measure: 65ch;
+  --container: 1120px;
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+  --band-y: clamp(3.25rem, 8vw, 6.5rem);
+  --radius: 6px;
+
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* 2. Reset & base ----------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--slate);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg { max-width: 100%; }
+svg { display: block; }
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: 0.75rem;
+  top: -100%;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--white);
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip-link:focus { top: 0.75rem; }
+
+/* Visible focus for everything. Never removed. */
+:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+/* On navy bands, brass outline needs no change (contrast ~4.6:1). */
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+/* 3. Typography ------------------------------------------------------------- */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  color: var(--ink);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); font-weight: 400; }
+h3 { font-size: var(--fs-h3); font-weight: 400; line-height: 1.2; letter-spacing: 0; }
+
+p { margin: 0 0 1.15rem; max-width: var(--measure); }
+p:last-child { margin-bottom: 0; }
+
+.lead { font-size: var(--fs-lead); color: var(--slate); line-height: 1.5; }
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--fs-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--brass-deep);
+  margin: 0 0 1rem;
+}
+
+/* 4. Layout helpers --------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.band { padding-block: var(--band-y); }
+
+.band--ink {
+  background: var(--ink);
+  color: var(--paper);
+}
+.band--ink h1, .band--ink h2, .band--ink h3 { color: var(--white); }
+.band--ink p { color: rgba(246, 248, 249, 0.85); }
+.band--ink .eyebrow { color: var(--brass); }
+
+.band--soft { background: rgba(126, 151, 173, 0.10); } /* harbour tint */
+
+.stack > * + * { margin-top: 1.15rem; }
+.measure { max-width: var(--measure); }
+.center { text-align: center; margin-inline: auto; }
+
+/* Section divider (short skyline segment) */
+.divider {
+  display: flex;
+  justify-content: center;
+  padding-block: clamp(1.5rem, 4vw, 2.5rem);
+}
+.divider svg { width: min(220px, 60%); height: auto; }
+
+/* 5. Skyline motif ---------------------------------------------------------- */
+.skyline path {
+  fill: none;
+  stroke: var(--brass);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+.band--ink .skyline path,
+.footer .skyline path { stroke: var(--brass); }
+
+/* Hero drawing — the detailed Toronto line art, painted via an alpha mask so it
+   inherits our palette. The PNG is a keyed line drawing (transparent ground). */
+.skyline-hero {
+  width: 100%;
+  max-width: 760px;
+  aspect-ratio: 2000 / 1091;
+  margin-top: clamp(2rem, 5vw, 3.25rem);
+  background-color: var(--ink);
+  -webkit-mask: url(../assets/skyline.png) left center / contain no-repeat;
+          mask: url(../assets/skyline.png) left center / contain no-repeat;
+}
+
+.nav-mark { width: 18px; height: auto; flex: none; }
+.nav-mark path { stroke: var(--brass); stroke-width: 1.5; fill: none; stroke-linecap: round; }
+
+/* 6. Header & navigation ---------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(246, 248, 249, 0.92);
+  backdrop-filter: saturate(140%) blur(6px);
+  border-bottom: 1px solid rgba(126, 151, 173, 0.30);
+}
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 68px;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: 1.3rem;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.wordmark:focus-visible { outline-offset: 4px; }
+
+.nav-toggle {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: 1px solid rgba(126, 151, 173, 0.5);
+  border-radius: var(--radius);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+}
+.nav-toggle__bars { width: 18px; height: 12px; position: relative; }
+.nav-toggle__bars::before,
+.nav-toggle__bars::after,
+.nav-toggle__bars span {
+  content: ""; position: absolute; left: 0; right: 0; height: 1.5px;
+  background: var(--ink);
+}
+.nav-toggle__bars::before { top: 0; }
+.nav-toggle__bars span { top: 5px; }
+.nav-toggle__bars::after { bottom: 0; }
+
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: clamp(1rem, 2.5vw, 2.25rem);
+  align-items: center;
+}
+.site-nav a {
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.35rem 0;
+  border-bottom: 2px solid transparent;
+}
+.site-nav a:hover { border-bottom-color: var(--brass); }
+.site-nav a[aria-current="page"] {
+  border-bottom-color: var(--brass);
+  color: var(--ink);
+}
+
+/* Mobile: JS enhances into a toggle. Without JS, nav stays visible. */
+@media (max-width: 767px) {
+  .js .nav-toggle { display: inline-flex; }
+  .js .site-nav {
+    display: none;
+    position: absolute;
+    left: 0; right: 0; top: 100%;
+    background: var(--paper);
+    border-bottom: 1px solid rgba(126, 151, 173, 0.3);
+    padding: 0.5rem var(--gutter) 1.25rem;
+  }
+  .js .site-nav.is-open { display: block; }
+  .site-nav ul { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+  .site-nav li { width: 100%; }
+  .site-nav a { display: block; width: 100%; padding: 0.75rem 0; }
+  .site-header { position: relative; } /* allow absolute dropdown positioning */
+}
+
+/* 7. Buttons & links -------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  padding: 0.85rem 1.5rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary {
+  background: var(--ink);
+  color: var(--white);
+}
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background: var(--brass);
+  transform: translateX(-101%);
+  transition: transform 0.25s ease;
+}
+.btn-primary:hover::after,
+.btn-primary:focus-visible::after { transform: translateX(0); }
+
+/* Primary on a navy band inverts */
+.band--ink .btn-primary {
+  background: var(--white);
+  color: var(--ink);
+}
+
+/* Text links / secondary links */
+.link {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--brass);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
+.link:hover { text-decoration-thickness: 2px; }
+.band--ink .link { color: var(--white); text-decoration-color: var(--brass); }
+
+.arrow-link { white-space: nowrap; }
+
+/* In-flow prose links */
+.prose a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--brass);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.prose a:hover { text-decoration-thickness: 2px; }
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem 1.75rem;
+  margin-top: 2rem;
+}
+
+/* 8. Components ------------------------------------------------------------- */
+
+/* Hero */
+.hero { padding-top: clamp(2.5rem, 6vw, 4.5rem); }
+.hero h1 { margin-top: 0.25rem; max-width: 15ch; }
+.hero .lead { max-width: 46ch; }
+
+/* Service card grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  margin-top: 2.5rem;
+}
+@media (min-width: 720px) {
+  .card-grid--3 { grid-template-columns: repeat(3, 1fr); }
+}
+.card {
+  background: var(--white);
+  border: 1px solid rgba(126, 151, 173, 0.45);
+  border-radius: var(--radius);
+  padding: clamp(1.5rem, 3vw, 2rem);
+}
+.card h3 { margin-bottom: 0.4rem; }
+.card p { color: var(--slate); font-size: 1rem; }
+
+/* Services list (tourism) */
+.service-list {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 2.75rem);
+  margin-top: 2.75rem;
+}
+@media (min-width: 720px) {
+  .service-list { grid-template-columns: repeat(2, 1fr); }
+  .service-list .service--lead { grid-column: 1 / -1; }
+}
+.service {
+  border-top: 1px solid rgba(126, 151, 173, 0.5);
+  padding-top: 1.25rem;
+}
+.service--lead { border-top: 2px solid var(--brass); }
+.service h3 { color: var(--ink); }
+.service p { font-size: 1rem; margin-bottom: 0; }
+
+/* Numbered steps (weddings) */
+.steps {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.25rem);
+  margin-top: 2.5rem;
+  counter-reset: step;
+}
+@media (min-width: 720px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+.step { padding-top: 1rem; border-top: 1px solid rgba(126, 151, 173, 0.5); }
+.step__num {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-size: 2rem;
+  color: var(--brass-deep);
+  line-height: 1;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+.step h3 { margin-bottom: 0.35rem; }
+.step p { font-size: 1rem; margin-bottom: 0; }
+
+/* Testimonials */
+.quotes {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2rem);
+  margin-top: 2.5rem;
+}
+@media (min-width: 720px) { .quotes { grid-template-columns: repeat(2, 1fr); } }
+.quote {
+  background: var(--white);
+  border: 1px solid rgba(126, 151, 173, 0.45);
+  border-left: 3px solid var(--brass);
+  border-radius: var(--radius);
+  padding: clamp(1.5rem, 3vw, 2rem);
+}
+.quote blockquote {
+  margin: 0 0 0.9rem;
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.quote figcaption { font-size: 0.95rem; color: var(--slate); }
+.placeholder-note {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brass-deep);
+  background: rgba(176, 141, 62, 0.12);
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Wedding gateway (home) — deliberately modest */
+.gateway {
+  border: 1px solid rgba(126, 151, 173, 0.45);
+  border-radius: var(--radius);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  max-width: 46rem;
+}
+.gateway h2 { font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.9rem); }
+
+/* Values (about) */
+.values { display: grid; gap: clamp(1.75rem, 4vw, 2.5rem); margin-top: 2.5rem; }
+@media (min-width: 720px) { .values { grid-template-columns: repeat(3, 1fr); } }
+.value { border-top: 2px solid var(--brass); padding-top: 1.1rem; }
+.value h3 { color: var(--ink); }
+.value p { font-size: 1rem; margin-bottom: 0; }
+
+/* Forms */
+.form { max-width: 40rem; margin-top: 2.5rem; }
+.form fieldset { border: 0; margin: 0 0 1.75rem; padding: 0; }
+.form legend {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ink);
+  padding: 0;
+  margin-bottom: 0.75rem;
+}
+.field { margin-bottom: 1.4rem; }
+.field label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+.field .hint { font-weight: 400; color: var(--slate); font-size: 0.85rem; }
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--slate);
+  background: var(--white);
+  border: 1px solid var(--harbour);
+  border-radius: var(--radius);
+  padding: 0.7rem 0.8rem;
+}
+.field textarea { min-height: 8rem; resize: vertical; }
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible { outline: 2px solid var(--brass); outline-offset: 1px; }
+
+.radio-group { display: grid; gap: 0.65rem; }
+.radio {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  border: 1px solid rgba(126, 151, 173, 0.5);
+  border-radius: var(--radius);
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+}
+.radio input { width: auto; margin-top: 0.15rem; }
+.radio:hover { border-color: var(--harbour); }
+.radio span { font-weight: 500; color: var(--ink); }
+
+.form .error {
+  color: #8A2A2A; /* accessible dark red on paper */
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 0.35rem;
+}
+.field input[aria-invalid="true"],
+.field textarea[aria-invalid="true"] { border-color: #8A2A2A; }
+
+.form-note { font-size: 0.95rem; margin-top: 1.5rem; }
+
+/* Contact aside */
+.contact-aside p { font-size: 1rem; }
+@media (min-width: 900px) {
+  .contact-layout { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+  .contact-layout .form { margin-top: 1.5rem; }
+}
+
+/* 9. Footer ----------------------------------------------------------------- */
+.footer {
+  background: var(--ink);
+  color: var(--paper);
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+}
+.footer a { color: var(--paper); }
+.footer__top { display: grid; gap: 2rem; }
+@media (min-width: 720px) {
+  .footer__top { grid-template-columns: 1.3fr 1fr; align-items: start; }
+}
+.footer__mark { display: inline-flex; align-items: center; gap: 0.55rem; }
+.footer__mark .wordmark { color: var(--white); }
+.footer .skyline { width: min(320px, 100%); margin-top: 1.25rem; opacity: 0.9; }
+.footer h2 { font-size: 1.1rem; color: var(--white); margin-bottom: 0.75rem; }
+.footer nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+.footer nav a { text-decoration: none; }
+.footer nav a:hover { text-decoration: underline; text-decoration-color: var(--brass); text-underline-offset: 4px; }
+.footer__contact a {
+  text-decoration: underline;
+  text-decoration-color: var(--brass);
+  text-underline-offset: 4px;
+}
+.footer__legal {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(246, 248, 249, 0.18);
+  font-size: 0.85rem;
+  color: rgba(246, 248, 249, 0.7);
+}
+.footer__legal p { max-width: none; }
+
+/* 10. Motion ---------------------------------------------------------------- */
+
+/* Scroll reveal — visible by default (no-JS safe); JS opts elements in. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.js .reveal.is-visible { opacity: 1; transform: none; }
+
+/* Skyline reveal — a left-to-right wipe that reads as the drawing being laid
+   down. Driven by main.js so the drawing is ALWAYS visible without JS or under
+   reduced motion; JS only clips-then-reveals when a wipe can actually play. */
+
+/* Global reduced-motion opt-out */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .js .reveal { opacity: 1; transform: none; }
+}
