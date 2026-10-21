@@ -22,7 +22,10 @@ beyond Google Fonts. Every page works with JavaScript disabled.
 ├── assets/
 │   ├── skyline.png     Detailed Toronto line drawing — the home-page hero art
 │   ├── skyline.svg     The small line fragment used in footers/dividers (reference)
-│   └── favicon.svg     CN Tower fragment of the skyline motif
+│   ├── favicon.svg     CN Tower fragment of the skyline motif
+│   ├── group-distillery-{750,1500}.jpg        Group-tour photo, 3:2 (home, "How I work")
+│   ├── group-distillery-wide-{800,1600}.jpg   Group-tour photo, 2:1 (tourism hero)
+│   └── og-image.jpg    1200×630 share graphic cropped from the wide photo
 └── README.md
 ```
 
@@ -43,9 +46,11 @@ fragments — a raster of thin lines would blur at ~20 px.
 - **Contrast:** brass (`#B08D3E`) is ~2.9:1 on paper and fails WCAG AA for text, so eyebrow
   *text* on light bands uses a deeper brass (`--brass-deep: #8A6D28`, ~4.6:1). Full brass is
   reserved for non-text decoration and for text on the navy bands (where it reaches ~4.6:1).
+- **Photos:** two photographs supplied by Kathy (a group tour in the Distillery District),
+  served as responsive JPEGs via `srcset`. Everything else stays line-art.
 - **Motion:** the hero skyline reveals with a left-to-right wipe on load (the one
-  orchestrated animation). Section headings fade up once on scroll. The wipe is driven by
-  `js/main.js` so the drawing is always visible without JavaScript or under reduced motion;
+  orchestrated animation). Section headings fade up once on scroll. The wipe is a CSS
+  animation gated on the `.js` class, so the drawing is always visible without JavaScript;
   all motion is disabled under `prefers-reduced-motion: reduce`.
 - **No cookies, analytics or trackers.**
 
@@ -94,8 +99,8 @@ Once the domain is live, update the `og:url` meta tags in each page to the real 
 2. In `contact.html`, replace `YOUR_FORM_ID` in the `<form action="...">` with the real ID.
 
 Until then, the visible **mailto** link is a working fallback. The form is fully usable
-without JavaScript (all fields visible); JS only pre-selects the inquiry type from the URL
-(`contact.html?type=weddings`) and hides the field groups that don't apply.
+without JavaScript; JS only pre-selects the inquiry type from the URL
+(`contact.html?type=weddings`).
 
 ## TODO — needs Kathy's input
 
@@ -105,11 +110,8 @@ Search the code for `TODO: confirm with Kathy` to find each in context.
    page and on the contact page. Replace with her real address.
 2. **Phone number** — optional; add to `contact.html` if she wants one listed.
 3. **Formspree form ID** — replace `YOUR_FORM_ID` in `contact.html` (see above).
-4. **Testimonials** — `weddings.html` has two clearly-marked placeholder quotes. Replace with
-   real, permission-granted testimonials and attributions, and remove the "Placeholder" tags.
-5. **`og:url`** — set the live URL in the Open Graph tags of all five pages.
-6. **`og:image`** — optional 1200×630 share graphic for link previews (there are no photos or
-   logo on the site by design; this would only be for social sharing).
-7. **Credentials / wording** — confirm the copy describing her services is accurate
-   (e.g. officiant registration wording, service area, anything she'd phrase differently).
-8. **Domain** — confirm the final domain so DNS and `og:url` can be finalized.
+4. **Photos** — confirm the captions on `index.html` and `tourism.html`, and that everyone
+   pictured is happy to appear on the site.
+5. **`og:url`** — currently the GitHub Pages address (`https://tnb3000.github.io/unionandco/`).
+   Update in all five pages if a custom domain goes live.
+6. **Domain** — confirm the final domain so DNS and `og:url` can be finalized.

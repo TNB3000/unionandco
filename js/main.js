@@ -3,7 +3,7 @@
    Progressive enhancement only. The site is fully usable without this file.
      1. Mobile navigation toggle
      2. Scroll reveal for section headings
-     3. Contact form: pre-select inquiry type + adapt fields
+     3. Contact form: pre-select inquiry type from the URL
    ========================================================================== */
 (function () {
   'use strict';
@@ -67,23 +67,12 @@
     reveals.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
-  /* 3. Skyline reveal ------------------------------------------------------- */
-  // The drawing is visible by default (CSS). Only when JS runs and motion is
-  // allowed do we clip it and wipe it open left-to-right, once.
-  var skyline = document.querySelector('.skyline-draw2');
-  if (skyline && !prefersReduced) {
-    skyline.style.clipPath = 'inset(0 100% 0 0)';
-    void skyline.offsetWidth; // commit the clipped start state before transitioning
-    skyline.style.transition = 'clip-path 1.6s ease';
-    skyline.style.clipPath = 'inset(0 0 0 0)';
-  }
-
-  /* 4. Contact form --------------------------------------------------------- */
+  /* 3. Contact form --------------------------------------------------------- */
+  // (The hero skyline wipe is a pure CSS animation; see .skyline-hero in styles.css.)
   var form = document.querySelector('[data-contact-form]');
   if (!form) { return; }
 
   var typeInputs = form.querySelectorAll('input[name="inquiry-type"]');
-  var conditionalGroups = form.querySelectorAll('[data-when]');
 
   // Map URL ?type= (or #type) values to radio values.
   var typeMap = {
@@ -105,32 +94,12 @@
     return typeMap[raw.toLowerCase()] || null;
   };
 
-  // Show only the field group(s) relevant to the current inquiry type.
-  var syncFields = function () {
-    var selected = form.querySelector('input[name="inquiry-type"]:checked');
-    var value = selected ? selected.value : null;
-    conditionalGroups.forEach(function (group) {
-      var when = group.getAttribute('data-when').split(/\s+/);
-      var show = when.indexOf(value) !== -1;
-      group.hidden = !show;
-      // Don't submit values from hidden groups.
-      group.querySelectorAll('input, select, textarea').forEach(function (input) {
-        input.disabled = !show;
-      });
-    });
-  };
-
   var requested = getRequestedType();
   if (requested) {
     typeInputs.forEach(function (input) {
       if (input.value === requested) { input.checked = true; }
     });
   }
-
-  typeInputs.forEach(function (input) {
-    input.addEventListener('change', syncFields);
-  });
-  syncFields();
 
   /* Lightweight, accessible validation (native validation still applies). */
   form.addEventListener('submit', function (e) {

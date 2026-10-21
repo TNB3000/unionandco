@@ -4,15 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact | Union &amp; Company</title>
-  <meta name="description" content="Get in touch with Kathy Marcelline about Toronto tourism guiding, tourism partnerships and advisory work, or a wedding ceremony. One short form, or email directly.">
+  <meta name="description" content="Get in touch with Kathy Marcelline about tour guiding and destination services, tourism partnerships and advisory work, or a wedding ceremony. One short form, or email directly.">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_CA">
   <meta property="og:site_name" content="Union &amp; Company">
   <meta property="og:title" content="Contact | Union &amp; Company">
-  <meta property="og:description" content="Get in touch about Toronto tourism guiding, partnerships and advisory work, or a wedding ceremony.">
-  <meta property="og:url" content="https://example.com/contact.html">
-  <!-- TODO: confirm with Kathy — set the live og:url and add an og:image share graphic (1200×630). -->
+  <meta property="og:description" content="Get in touch about tour guiding and destination services, partnerships and advisory work, or a wedding ceremony.">
+  <meta property="og:url" content="https://tnb3000.github.io/unionandco/contact.html">
+  <meta property="og:image" content="https://tnb3000.github.io/unionandco/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="A tour group gathered on a brick lane in Toronto's Distillery District.">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- TODO: confirm with Kathy — og:url points at the GitHub Pages address; update if a custom domain goes live. -->
 
   <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
 
@@ -53,8 +58,8 @@
       <div class="container">
         <span class="eyebrow">Contact</span>
         <h1>Tell me what you&rsquo;re planning.</h1>
-        <p class="lead measure">One short form for every kind of inquiry. Choose what fits and I&rsquo;ll be in
-          touch. Prefer email? You can reach me directly below.</p>
+        <p class="lead measure">One short form for your inquiry, and I&rsquo;ll be in touch. Prefer email? You can
+          reach me directly below.</p>
       </div>
     </section>
 
@@ -70,11 +75,11 @@
                 action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
 
             <fieldset>
-              <legend>What&rsquo;s this about?</legend>
+              <legend>Select service</legend>
               <div class="radio-group" role="radiogroup" aria-label="Type of inquiry">
                 <label class="radio">
                   <input type="radio" name="inquiry-type" value="tourism-guiding" required>
-                  <span>Tourism guiding</span>
+                  <span>Tour guide or destination services</span>
                 </label>
                 <label class="radio">
                   <input type="radio" name="inquiry-type" value="tourism-partnerships">
@@ -82,7 +87,7 @@
                 </label>
                 <label class="radio">
                   <input type="radio" name="inquiry-type" value="weddings">
-                  <span>Weddings</span>
+                  <span>Wedding ceremony</span>
                 </label>
               </div>
             </fieldset>
@@ -98,30 +103,13 @@
             </div>
 
             <div class="field">
-              <label for="organization">Organization <span class="hint">(optional)</span></label>
+              <label for="organization">Organization <span class="hint">(if applicable)</span></label>
               <input type="text" id="organization" name="organization" autocomplete="organization">
             </div>
 
-            <!-- Tourism-specific fields (shown for guiding inquiries when JS is on) -->
-            <div data-when="tourism-guiding">
-              <div class="field">
-                <label for="group-size">Group size <span class="hint">(approximate)</span></label>
-                <input type="text" id="group-size" name="group-size" inputmode="numeric">
-              </div>
-              <div class="field">
-                <label for="travel-dates">Travel dates <span class="hint">(or rough timing)</span></label>
-                <input type="text" id="travel-dates" name="travel-dates"
-                       placeholder="e.g. late September 2026">
-              </div>
-            </div>
-
-            <!-- Wedding-specific field (shown for wedding inquiries when JS is on) -->
-            <div data-when="weddings">
-              <div class="field">
-                <label for="ceremony-date">Ceremony date <span class="hint">(or approximate)</span></label>
-                <input type="text" id="ceremony-date" name="ceremony-date"
-                       placeholder="e.g. 2026-06-20">
-              </div>
+            <div class="field">
+              <label for="event-date">Event date <span class="hint">(or approximate timing)</span></label>
+              <input type="text" id="event-date" name="event-date" placeholder="e.g. late September 2026">
             </div>
 
             <div class="field">
