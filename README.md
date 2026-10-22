@@ -107,8 +107,8 @@ without JavaScript; JS only pre-selects the inquiry type from the URL
 
 Search the code for `TODO: confirm with Kathy` to find each in context.
 
-1. **Business email** — placeholder `hello@unionandcompany.ca` appears in the footer of every
-   page and on the contact page. Replace with her real address.
+1. **Business email** — `kathy@unionandcompany.ca` is set in the footer of every page and on
+   the contact page.
 2. **Phone number** — optional; add to `contact.html` if she wants one listed.
 3. **Formspree form ID** — replace `YOUR_FORM_ID` in `contact.html` (see above).
 4. **Photos** — confirm the captions on `index.html`, `tourism.html` and `weddings.html`, and
