@@ -3,7 +3,7 @@
    Progressive enhancement only. The site is fully usable without this file.
      1. Mobile navigation toggle
      2. Scroll reveal for section headings
-     3. Contact form: pre-select inquiry type from the URL
+     3. Contact page: highlight the inquiry type named in the URL
    ========================================================================== */
 (function () {
   'use strict';
@@ -67,14 +67,16 @@
     reveals.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
-  /* 3. Contact form --------------------------------------------------------- */
+  /* 3. Contact page: highlight the option named in the URL ------------------- */
   // (The hero skyline wipe is a pure CSS animation; see .skyline-hero in styles.css.)
-  var form = document.querySelector('[data-contact-form]');
-  if (!form) { return; }
+  // Links such as contact.html?type=weddings arrive from the Tourism and Weddings pages;
+  // the matching option is brought into view and marked so the right email link is obvious.
+  var options = document.querySelector('[data-contact-options]');
+  if (!options) { return; }
 
-  var typeInputs = form.querySelectorAll('input[name="inquiry-type"]');
+  var optionItems = options.querySelectorAll('.contact-option');
 
-  // Map URL ?type= (or #type) values to radio values.
+  // Map URL ?type= (or #type) values to option types.
   var typeMap = {
     'tourism-guiding': 'tourism-guiding',
     'tourism': 'tourism-guiding',
@@ -96,23 +98,13 @@
 
   var requested = getRequestedType();
   if (requested) {
-    typeInputs.forEach(function (input) {
-      if (input.value === requested) { input.checked = true; }
+    optionItems.forEach(function (item) {
+      if (item.getAttribute('data-type') === requested) {
+        item.classList.add('is-requested');
+        var link = item.querySelector('a');
+        if (link) { link.focus({ preventScroll: true }); }
+        item.scrollIntoView({ block: 'center', behavior: prefersReduced ? 'auto' : 'smooth' });
+      }
     });
   }
-
-  /* Lightweight, accessible validation (native validation still applies). */
-  form.addEventListener('submit', function (e) {
-    var invalid = form.querySelector(':invalid:not([disabled])');
-    if (invalid) {
-      e.preventDefault();
-      invalid.setAttribute('aria-invalid', 'true');
-      invalid.focus();
-    }
-  });
-  form.addEventListener('input', function (e) {
-    if (e.target.getAttribute('aria-invalid') === 'true' && e.target.checkValidity()) {
-      e.target.removeAttribute('aria-invalid');
-    }
-  });
 })();

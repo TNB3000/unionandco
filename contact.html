@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact | Union &amp; Company</title>
-  <meta name="description" content="Get in touch with Kathy Marcelline about tour guiding and destination services, tourism partnerships and advisory work, or a wedding ceremony. One short form, or email directly.">
+  <meta name="description" content="Get in touch with Kathy Marcelline about tour guiding and destination services, tourism partnerships and advisory work, or a wedding ceremony. Email info@unionandcompany.ca.">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_CA">
@@ -58,82 +58,40 @@
       <div class="container">
         <span class="eyebrow">Contact</span>
         <h1>Tell me what you&rsquo;re planning.</h1>
-        <p class="lead measure">One short form for your inquiry, and I&rsquo;ll be in touch. Prefer email? You can
-          reach me directly below.</p>
+        <p class="lead measure">Send me a note at <a class="prose" href="mailto:info@unionandcompany.ca">info@unionandcompany.ca</a>
+          and I&rsquo;ll be in touch. The links below start an email with the right subject line.</p>
       </div>
     </section>
 
     <section class="band band--soft">
       <div class="container contact-layout">
-        <div>
-          <!--
-            TODO: confirm with Kathy — create a Formspree form and replace YOUR_FORM_ID below,
-            or swap the action for her preferred handler. The mailto link in the aside is the
-            no-cost fallback and works today.
-          -->
-          <form class="form" data-contact-form
-                action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-
-            <fieldset>
-              <legend>Select service</legend>
-              <div class="radio-group" role="radiogroup" aria-label="Type of inquiry">
-                <label class="radio">
-                  <input type="radio" name="inquiry-type" value="tourism-guiding" required>
-                  <span>Tour guide or destination services</span>
-                </label>
-                <label class="radio">
-                  <input type="radio" name="inquiry-type" value="tourism-partnerships">
-                  <span>Tourism partnerships &amp; advisory</span>
-                </label>
-                <label class="radio">
-                  <input type="radio" name="inquiry-type" value="weddings">
-                  <span>Wedding ceremony</span>
-                </label>
-              </div>
-            </fieldset>
-
-            <div class="field">
-              <label for="name">Your name</label>
-              <input type="text" id="name" name="name" autocomplete="name" required>
-            </div>
-
-            <div class="field">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" autocomplete="email" required>
-            </div>
-
-            <div class="field">
-              <label for="organization">Organization <span class="hint">(if applicable)</span></label>
-              <input type="text" id="organization" name="organization" autocomplete="organization">
-            </div>
-
-            <div class="field">
-              <label for="event-date">Event date <span class="hint">(or approximate timing)</span></label>
-              <input type="text" id="event-date" name="event-date" placeholder="e.g. late September 2026">
-            </div>
-
-            <div class="field">
-              <label for="message">Your message</label>
-              <textarea id="message" name="message" required></textarea>
-            </div>
-
-            <!-- Simple spam honeypot; real people leave this empty. -->
-            <div class="field" hidden aria-hidden="true">
-              <label for="company-website">Leave this field empty</label>
-              <input type="text" id="company-website" name="_gotcha" tabindex="-1" autocomplete="off">
-            </div>
-
-            <button type="submit" class="btn btn-primary">Send inquiry</button>
-
-            <p class="form-note">This form uses a third-party service to deliver your message. If you&rsquo;d
-              rather not, please <a class="prose" href="mailto:kathy@unionandcompany.ca">email me directly</a>.</p>
-          </form>
+        <div class="contact-options" data-contact-options>
+          <h2 class="contact-options__title">What are you planning?</h2>
+          <ul class="contact-options__list">
+            <li class="card contact-option" data-type="tourism-guiding">
+              <h3>Tour guide or destination services</h3>
+              <p>Step-on guiding, arrival services at Toronto Pearson, and custom days across the Greater Toronto Area.
+                Tell me your dates, group size and where you&rsquo;re coming from.</p>
+              <a class="btn btn-primary" href="mailto:info@unionandcompany.ca?subject=Tour%20guide%20or%20destination%20services%20inquiry">Email about guiding</a>
+            </li>
+            <li class="card contact-option" data-type="tourism-partnerships">
+              <h3>Tourism partnerships &amp; advisory</h3>
+              <p>Destination marketing, product development and partnership work for organizations and operators.
+                A line about your organization and what you&rsquo;re hoping to achieve is plenty to start.</p>
+              <a class="btn btn-primary" href="mailto:info@unionandcompany.ca?subject=Tourism%20partnerships%20and%20advisory%20inquiry">Email about partnerships</a>
+            </li>
+            <li class="card contact-option" data-type="weddings">
+              <h3>Wedding ceremony</h3>
+              <p>Officiating in Toronto and across the GTA. Include your date (or approximate timing), the venue if you
+                have one, and anything you already know you want the ceremony to be.</p>
+              <a class="btn btn-primary" href="mailto:info@unionandcompany.ca?subject=Wedding%20ceremony%20inquiry">Email about your date</a>
+            </li>
+          </ul>
         </div>
 
-        <aside class="contact-aside" aria-label="Other ways to reach Kathy">
-          <span class="eyebrow">Or reach me directly</span>
-          <!-- TODO: confirm with Kathy — add a phone number here if she wants one listed. -->
-          <p><a class="prose" href="mailto:kathy@unionandcompany.ca">kathy@unionandcompany.ca</a></p>
+        <aside class="contact-aside" aria-label="How to reach Kathy">
+          <span class="eyebrow">Email</span>
+          <p><a class="prose" href="mailto:info@unionandcompany.ca">info@unionandcompany.ca</a></p>
           <p>Based in Toronto, Ontario. Available across the Greater Toronto Area and for step-on and
             arrival services at Toronto Pearson.</p>
           <p>I read every message myself and aim to reply within a few business days.</p>
@@ -158,7 +116,7 @@
         </div>
         <div class="footer__contact">
           <h2>Get in touch</h2>
-          <p><a href="mailto:kathy@unionandcompany.ca">kathy@unionandcompany.ca</a></p>
+          <p><a href="mailto:info@unionandcompany.ca">info@unionandcompany.ca</a></p>
           <nav aria-label="Footer">
             <ul>
               <li><a href="tourism.html">Tourism</a></li>

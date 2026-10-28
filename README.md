@@ -92,27 +92,23 @@ If Kathy has a domain (e.g. `unionandcompany.ca`), add it under **Settings → P
 domain**, then create the DNS records GitHub shows. GitHub will add a `CNAME` file to the repo.
 Once the domain is live, update the `og:url` meta tags in each page to the real address.
 
-## Contact form
+## Contact page
 
-`contact.html` posts to **Formspree**. Before launch:
-
-1. Create a form at <https://formspree.io> and copy its form ID.
-2. In `contact.html`, replace `YOUR_FORM_ID` in the `<form action="...">` with the real ID.
-
-Until then, the visible **mailto** link is a working fallback. The form is fully usable
-without JavaScript; JS only pre-selects the inquiry type from the URL
-(`contact.html?type=weddings`).
+There is no contact form (removed at Kathy's request, October 2026). `contact.html` offers
+three email links, one per service, each a `mailto:info@unionandcompany.ca` with a prefilled
+subject line, plus the address itself. Links such as `contact.html?type=weddings` from the
+Tourism and Weddings pages still work: JS highlights and scrolls to the matching option. No
+third-party services are involved.
 
 ## TODO — needs Kathy's input
 
 Search the code for `TODO: confirm with Kathy` to find each in context.
 
-1. **Business email** — `kathy@unionandcompany.ca` is set in the footer of every page and on
+1. **Business email** — `info@unionandcompany.ca` is set in the footer of every page and on
    the contact page.
 2. **Phone number** — optional; add to `contact.html` if she wants one listed.
-3. **Formspree form ID** — replace `YOUR_FORM_ID` in `contact.html` (see above).
-4. **Photos** — confirm the captions on `index.html`, `tourism.html` and `weddings.html`, and
+3. **Photos** — confirm the captions on `index.html`, `tourism.html` and `weddings.html`, and
    that everyone pictured is happy to appear on the site.
-5. **`og:url`** — currently the GitHub Pages address (`https://tnb3000.github.io/unionandco/`).
+4. **`og:url`** — currently the GitHub Pages address (`https://tnb3000.github.io/unionandco/`).
    Update in all five pages if a custom domain goes live.
-6. **Domain** — confirm the final domain so DNS and `og:url` can be finalized.
+5. **Domain** — confirm the final domain so DNS and `og:url` can be finalized.

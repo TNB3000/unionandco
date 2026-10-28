@@ -657,3 +657,12 @@ p:last-child { margin-bottom: 0; }
   .js .reveal { opacity: 1; transform: none; }
   .js .skyline-hero { animation: none; }
 }
+
+/* Contact options (replaced the inquiry form, October 2026) */
+.contact-options__title { margin-bottom: 1.25rem; }
+.contact-options__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
+.contact-option .btn { margin-top: 1rem; }
+.contact-option.is-requested { outline: 2px solid var(--brass); outline-offset: 4px; }
+@media (min-width: 768px) {
+  .contact-layout .contact-options { margin-top: 1.5rem; }
+}
